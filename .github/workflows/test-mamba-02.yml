@@ -1,0 +1,17 @@
+name: Mamba on downgraded Conda (4.12.0)
+on:
+  workflow_dispatch:
+
+jobs:
+  bash-test:
+    runs-on: Ubuntu-20.04
+    name: Downgrade Conda and Mamba
+    steps:
+      - shell: bash
+        run: |
+          conda info
+          conda config --set allow_conda_downgrades true
+          conda install conda=4.12.0 -y
+          conda install --yes -c conda-forge mamba
+          conda list
+          conda info
