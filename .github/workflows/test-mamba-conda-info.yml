@@ -1,0 +1,18 @@
+name: Conda info (22.11.1) @Ubuntu20
+on:
+  workflow_dispatch:
+
+jobs:
+  bash-test:
+    runs-on: [Ubuntu-20.04]
+    name: Conda info
+    steps:
+      - name: Conda info
+        shell: bash
+        run: |
+          echo '##### Conda info'
+          conda info
+          echo '##### Conda config'
+          conda config --show-sources
+          echo '##### Conda list'
+          conda list --show-channel-urls
