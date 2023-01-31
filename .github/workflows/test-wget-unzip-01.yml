@@ -1,0 +1,13 @@
+name: Test wget-unzip
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-2022
+    name: Test
+    steps:
+      - shell: powershell
+        run: |
+          wget https://reqrypt.org/download/WinDivert-2.2.0-A.zip -O ~/windivert.zip
+          unzip ~/windivert.zip -d windivert
