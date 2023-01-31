@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-2022
     name: Test
     steps:
-      - shell: powershell
+      - name: Test getenv
         run: |
           python -c "import os; print(os.getenv('APPDATA'))"
           python -c "import os; assert os.getenv('APPDATA') is not None"
