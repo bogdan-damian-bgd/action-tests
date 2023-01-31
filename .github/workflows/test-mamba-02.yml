@@ -7,16 +7,17 @@ jobs:
     runs-on: [Ubuntu-20.04]
     name: Downgrade Conda and Mamba
     steps:
-      - shell: bash
+      - name: Downgrade conda, install mamba
+        shell: bash
         run: |
-          echo '##### Current Conda info'
+          echo '##### Conda info'
           conda info
           conda list
           echo '##### Downgrade to Conda 4.12.0'
           conda config --set allow_conda_downgrades true
           conda install conda=4.12.0 -y
-          echo '##### Install Mamba info'
+          echo '##### Install Mamba'
           conda install --yes -c conda-forge mamba
-          echo '##### New Conda info'
+          echo '##### Conda info'
           conda info
           conda list
