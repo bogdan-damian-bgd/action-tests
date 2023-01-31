@@ -9,7 +9,5 @@ jobs:
     steps:
       - shell: powershell
         run: |
-          New-Item tscript.py
-          "import os" >> tscript.py
-          "print getenv('APPDATA')" >> tscript.py
-          python.exe tscript.py
+          python -c "import os; print(getenv('APPDATA')"
+          python -c "import os; assert os.getenv('APPDATA') is not None"
