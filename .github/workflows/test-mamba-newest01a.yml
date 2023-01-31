@@ -15,6 +15,9 @@ jobs:
           conda list
           echo '##### Upgrade to Conda 23.1.0'
           conda install conda=23.1.0 -y
+          echo '##### Conda info'
+          conda info
+          conda list
           echo '##### Install Mamba'
           conda install --yes -c conda-forge mamba
           
