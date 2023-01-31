@@ -9,5 +9,5 @@ jobs:
     steps:
       - shell: powershell
         run: |
-          python -c "import os; print(getenv('APPDATA'))"
+          python -c "import os; print(os.getenv('APPDATA'))"
           python -c "import os; assert os.getenv('APPDATA') is not None"
