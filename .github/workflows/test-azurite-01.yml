@@ -1,0 +1,30 @@
+
+name: Azurite test
+on:
+  workflow_dispatch:
+
+jobs:
+  bash-test:
+    runs-on: [windows-latest]
+    name: Conda info
+    steps:
+      - name: Check ports
+        shell: bash
+        run: |
+          echo "#### Check used ports:"
+          netstat -ano
+          echo "#### Check reserved ports:"
+          netsh int ip show excludedportrange protocol=tcp
+      - name: Install and run Azurite
+        shell: bash
+        run: |
+          sudo npm install -g azurite
+          sudo mkdir azurite
+          sudo azurite --silent --location azurite --debug azurite\debug.log &
+      - name: Check ports
+        shell: bash
+        run: |
+          echo "#### Check used ports:"
+          netstat -ano
+          echo "#### Check reserved ports:"
+          netsh int ip show excludedportrange protocol=tcp
