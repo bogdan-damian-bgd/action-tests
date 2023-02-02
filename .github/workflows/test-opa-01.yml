@@ -1,3 +1,7 @@
+name: Test OPA
+on:
+  workflow_dispatch:
+
 jobs:
   tf-plan:
     runs-on: ubuntu-latest
