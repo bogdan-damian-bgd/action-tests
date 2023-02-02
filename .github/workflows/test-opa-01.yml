@@ -21,7 +21,9 @@ jobs:
         with:
           version: 0.48.0
       - name: "Path Test"
-        run : pwd
+        run : |
+          pwd
+          ls -al
       - name: "Terraform Init"
         run : terraform init
       - name: "Terraform Validate"
