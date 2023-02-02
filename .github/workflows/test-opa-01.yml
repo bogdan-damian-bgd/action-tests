@@ -20,10 +20,10 @@ jobs:
         uses: open-policy-agent/setup-opa@v2
         with:
           version: 0.48.0
+      - name: "Path Test"
+        run : pwd
       - name: "Terraform Init"
-        run : |
-          pwd
-          terraform init
+        run : terraform init
       - name: "Terraform Validate"
         run : terraform validate
       - name: "Terraform Plan"
