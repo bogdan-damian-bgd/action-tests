@@ -28,3 +28,7 @@ jobs:
         run : terraform validate
       - name: "Terraform Plan"
         run : terraform plan -lock=false --out tfplan.binary
+      - name: "Run OPA Tests"
+        run: |
+          terraform show -json tfplan.binary > tfplan.json
+          opa eval data.policy.mandatory_tags -d ${{ github.workspace }}/.opa/ -i tfplan.json -f pretty
