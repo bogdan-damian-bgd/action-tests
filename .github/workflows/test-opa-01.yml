@@ -21,7 +21,9 @@ jobs:
         with:
           version: 0.48.0
       - name: "Terraform Init"
-        run : terraform init
+        run : |
+          pwd
+          terraform init
       - name: "Terraform Validate"
         run : terraform validate
       - name: "Terraform Plan"
