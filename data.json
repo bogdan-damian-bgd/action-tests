@@ -1,28 +1,49 @@
-jobs:
-  tf-plan:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}/terraform
+package policy
 
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-      - name: "Terraform Install"
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.3.4
-      - name: "Setup OPA"
-        uses: open-policy-agent/setup-opa@v2
-        with:
-          version: 0.48.0
-      - name: "Terraform Init"
-        run : terraform init
-      - name: "Terraform Validate"
-        run : terraform validate
-      - name: "Terraform Plan"
-        run : terraform plan -lock=false --out tfplan.binary
-      - name: "Run OPA Tests"
-        run: |
-          terraform show -json tfplan.binary > tfplan.json
-          opa eval data.policy.mandatory_tags -d ${{ github.workspace }}/.opa/ -i tfplan.json -f pretty
+mandatory_tags[msg] {
+  check_tags(changes[c])
+  msg := sprintf("fail: %v is missing required tags.", [changes[c].address])
+}
+
+check_tags(resource) {
+ # read the tags based on the resource type
+ tags = read_tags(resource)
+ # check for the tag enforcement
+ match(resource.change.after)
+}
+
+read_tags(resource) = tags {
+ tags = resource.change.after.tags
+}
+
+match(i) {
+	not i.tags
+}
+
+match(i) {
+	not i.tags.AgileTeam
+}
+
+match(i) {
+	not i.tags.Contact
+}
+
+match(i) {
+	not i.tags.Environment
+}
+
+match(i) {
+	not i.tags.Repository
+}
+
+# get the changed resources
+changes := { c |
+	some path, value
+	walk(input, [path, value])
+	reverse_index(path, 1) == "resource_changes"
+	c = value[_]
+}
+
+reverse_index(path, idx) = value {
+	value := path[count(path) - idx]
+}
