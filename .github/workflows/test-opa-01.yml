@@ -33,4 +33,4 @@ jobs:
       - name: "Run OPA Tests"
         run: |
           terraform show -json tfplan.binary > tfplan.json
-          opa eval data.policy.mandatory_tags -d ${{ github.workspace }}/data.json -i tfplan.json -f pretty
+          opa eval --data ${{ github.workspace }}/data.json 'data.policy.mandatory_tags' -i tfplan.json -f pretty
