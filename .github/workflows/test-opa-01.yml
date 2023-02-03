@@ -35,4 +35,4 @@ jobs:
           terraform show -json tfplan.binary > tfplan.json
           cat tfplan.json
           opa eval --data ${{ github.workspace }}/policy.rego 'data.policy.mandatory_tags' -i tfplan.json
-          opa eval --data ${{ github.workspace }}/policy2.rego 'data.spacelift.allow' -i tfplan2.json
+          opa eval --data ${{ github.workspace }}/policy2.rego 'data.spacelift.allow' -i tfplan.json
