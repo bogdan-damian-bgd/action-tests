@@ -32,7 +32,7 @@ jobs:
 #        run : terraform plan -lock=false --out tfplan.binary
       - name: "Run OPA Tests"
         run: |
-           opa eval --data ${{ github.workspace }}/policy3.rego 'data' -i tfplan3.json
+           opa eval --data ${{ github.workspace }}/policy3.rego 'data.spacelift' -i tfplan3.json
 #          terraform show -json tfplan.binary > tfplan.json
 #          cat tfplan.json
 #          opa eval --data ${{ github.workspace }}/policy.rego 'data.policy.mandatory_tags' -i tfplan.json
