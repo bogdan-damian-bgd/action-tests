@@ -1,0 +1,23 @@
+name: Test Cosmos
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-2022
+    name: Test
+    steps:
+      - name: Test Cosmos
+        shell: powershell
+        run: |
+          echo "#### Check used ports"
+          netstat -aob
+          echo "#### Start CosmosDb emulator"
+          Import-Module "$env:ProgramFiles\Azure Cosmos DB Emulator\PSModules\Microsoft.Azure.CosmosDB.Emulator"
+          $startEmulatorCmd = "Start-CosmosDbEmulator -NoFirewall"
+          Write-Host $startEmulatorCmd
+          Invoke-Expression -Command $startEmulatorCmd
+          echo "#### Check used ports and web page"
+          netstat -aob
+          Invoke-WebRequest "https://localhost:8081/_explorer/index.html"
+          
