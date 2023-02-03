@@ -1,3 +1,5 @@
+package spacelift
+
 default allow = false
 allow = true {
     input.method == "GET"
