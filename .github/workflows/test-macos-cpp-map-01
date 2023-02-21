@@ -1,5 +1,5 @@
 
-name: Test MacOS C++ <map> <time.h>
+name: Test MacOS C++ <map>
 on:
   workflow_dispatch:
 
