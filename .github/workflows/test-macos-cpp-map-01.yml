@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
-      - name: "Run OPA Tests"
+      - name: "Run Test"
         run: |
            g++ test-macos-cpp-01.cpp
            ./a.out
