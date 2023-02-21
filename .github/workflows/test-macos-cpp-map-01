@@ -1,0 +1,16 @@
+
+name: Test MacOS C++ <map> <time.h>
+on:
+  workflow_dispatch:
+
+jobs:
+  cpp-test:
+    runs-on: macos-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+      - name: "Run OPA Tests"
+        run: |
+           g++ test-macos-cpp.cpp
+           ./a.out
