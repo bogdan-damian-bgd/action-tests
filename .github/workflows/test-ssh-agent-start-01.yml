@@ -4,13 +4,13 @@ on:
 
 jobs:
   test:
-    runs-on: windows-2019
+    runs-on: windows-2022
     name: Test
     steps:
       - name: Test
         shell: powershell
         run: |
-          Get-Service ssh-agent
           Get-Service -Name ssh-agent | Set-Service -StartupType Manual
           Start-Service ssh-agent
+          Get-Service ssh-agent
           
