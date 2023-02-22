@@ -1,4 +1,4 @@
-name: Test ssh-agent start
+name: Test ssh-agent svc
 on:
   workflow_dispatch:
 
@@ -8,6 +8,7 @@ jobs:
     name: Test
     steps:
       - name: Test
+        shell: powershell
         run: |
           Get-Service ssh-agent
           Get-Service -Name ssh-agent | Set-Service -StartupType Manual
